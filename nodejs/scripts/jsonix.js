@@ -6114,10 +6114,14 @@ if (typeof require === 'function') {
 		}
 		else
 		{
-			// We're probably in browser, maybe browserify
-			// Do not require xmldom, xmlhttprequest as they'r provided by the browser
-			// Do not require fs since file system is not available anyway
-			define([], _jsonix_factory);
+			if (typeof exports === "object")
+			{
+				module.exports = _jsonix_factory();
+			}
+			else
+			{
+				var Jsonix = _jsonix_factory().Jsonix;
+			}
 		}
 	}
 	else {
